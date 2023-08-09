@@ -16,7 +16,7 @@ const Header = () => {
 				<UserDeleteOutlined style={{ fontSize: '30px', marginRight: '15px' }} />
 				<RouterLink to={Paths.home}>
 					<Sbutton type='ghost'>
-						<Typography.Title level={1}>Victims</Typography.Title>
+						<Typography.Title level={1}>Death Note</Typography.Title>
 					</Sbutton>
 				</RouterLink>
 			</Space>
@@ -25,14 +25,14 @@ const Header = () => {
 					<Sbutton
 						type='ghost'
 						icon={<UserOutlined />}>
-						Register
+						Sign Up
 					</Sbutton>
 				</RouterLink>
 				<RouterLink to={Paths.login}>
 					<Sbutton
 						type='ghost'
 						icon={<LoginOutlined />}>
-						Login
+						Log In
 					</Sbutton>
 				</RouterLink>
 			</Space>

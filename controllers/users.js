@@ -1,7 +1,7 @@
-const { prisma } = require("../prisma/prisma-client");
-const bcrypt = require("bcrypt");
-const { json } = require("express");
-const jwt = require("jsonwebtoken");
+const { prisma } = require('../prisma/prisma-client');
+const bcrypt = require('bcrypt');
+
+const jwt = require('jsonwebtoken');
 /**
  *
  * @route POST/api/user/login
@@ -15,7 +15,7 @@ const login = async (req, res) => {
 		if (!email || !password) {
 			return res
 				.status(400)
-				.json({ message: "Пожалуйста заполните обязательные поля" });
+				.json({ message: 'Пожалуйста заполните обязательные поля' });
 		}
 		const user = await prisma.user.findFirst({
 			where: {
@@ -31,13 +31,13 @@ const login = async (req, res) => {
 				id: user.id,
 				name: user.name,
 				email: user.email,
-				token: jwt.sign({ id: user.id }, secret, { expiresIn: "10d" }),
+				token: jwt.sign({ id: user.id }, secret, { expiresIn: '10d' }),
 			});
 		} else {
-			return res.status(400).json({ message: "неверно введены данные" });
+			return res.status(400).json({ message: 'неверно введены данные' });
 		}
 	} catch (error) {
-		return res.status(500).json({ message: "что-то пошло не так" });
+		return res.status(500).json({ message: 'что-то пошло не так' });
 	}
 };
 
@@ -51,7 +51,7 @@ const register = async (req, res) => {
 	try {
 		const { email, password, name } = req.body;
 		if (!email || !password || !name) {
-			return res.status(400).json({ message: "заполните обязательные поля" });
+			return res.status(400).json({ message: 'заполните обязательные поля' });
 		}
 
 		const registeredUser = await prisma.user.findFirst({
@@ -63,7 +63,7 @@ const register = async (req, res) => {
 		if (registeredUser) {
 			return res
 				.status(400)
-				.json({ message: "пользователь с таким email уже существует" });
+				.json({ message: 'пользователь с таким email уже существует' });
 		}
 
 		const salt = await bcrypt.genSalt(10);
@@ -82,15 +82,15 @@ const register = async (req, res) => {
 				id: user.id,
 				email: user.email,
 				name: user.name,
-				token: jwt.sign({ id: user.id }, secret, { expiresIn: "10d" }),
+				token: jwt.sign({ id: user.id }, secret, { expiresIn: '10d' }),
 			});
 		} else {
 			return res
 				.status(400)
-				.json({ message: "не удалось создать пользователя" });
+				.json({ message: 'не удалось создать пользователя' });
 		}
 	} catch (error) {
-		return res.status(500).json({ message: "что-то пошло не так" });
+		return res.status(500).json({ message: 'что-то пошло не так' });
 	}
 };
 
@@ -104,7 +104,7 @@ const current = async (req, res) => {
 	try {
 		return res.status(200).json(req.user);
 	} catch (error) {
-		return res.status(500).json({ message: "что-то пошло не так" });
+		return res.status(500).json({ message: 'что-то пошло не так' });
 	}
 };
 
