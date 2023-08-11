@@ -10,17 +10,20 @@ import Login from './pages/login';
 import Register from './pages/register';
 
 import './index.css';
-import Layout from './components/layout';
+
+import Auth from './features/auth/auth';
+import Victims from './pages/victims';
+import AddVictim from './pages/addVictim';
+import EditVictim from './pages/editVictim';
+import { Status } from './pages/Status';
+import { Victim } from './pages/Victim';
 
 const router = createBrowserRouter([
 	{
 		path: Paths.home,
-		element: (
-			<Layout>
-				<h1>victims</h1>
-			</Layout>
-		),
+		element: <Victims />,
 	},
+
 	{
 		path: Paths.login,
 		element: <Login />,
@@ -28,6 +31,22 @@ const router = createBrowserRouter([
 	{
 		path: Paths.register,
 		element: <Register />,
+	},
+	{
+		path: Paths.victimAdd,
+		element: <AddVictim />,
+	},
+	{
+		path: `${Paths.victim}/:id`,
+		element: <Victim />,
+	},
+	{
+		path: `${Paths.victimEdit}/:id`,
+		element: <EditVictim />,
+	},
+	{
+		path: `${Paths.status}/:status`,
+		element: <Status />,
 	},
 ]);
 
@@ -38,7 +57,9 @@ root.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
-				<RouterProvider router={router} />
+				<Auth>
+					<RouterProvider router={router} />
+				</Auth>
 			</ConfigProvider>
 		</Provider>
 	</React.StrictMode>

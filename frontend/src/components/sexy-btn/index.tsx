@@ -10,10 +10,13 @@ type Props = {
 	shape?: 'default' | 'circle' | 'round';
 	icon?: React.ReactNode;
 	onClick?: () => void;
+	style?: {};
+	disabled?: boolean;
 };
 
 const Sbutton = ({
 	children,
+	style,
 	htmlType = 'button',
 	type,
 	danger,
@@ -21,6 +24,7 @@ const Sbutton = ({
 	icon,
 	shape,
 	onClick,
+	disabled,
 }: Props) => {
 	return (
 		<Form.Item>
@@ -31,6 +35,8 @@ const Sbutton = ({
 				loading={loading}
 				shape={shape}
 				icon={icon}
+				style={style}
+				disabled={disabled}
 				onClick={onClick}>
 				{children}
 			</Button>

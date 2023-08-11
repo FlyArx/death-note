@@ -20,9 +20,9 @@ export const authApi = api.injectEndpoints({
 				body: userData,
 			}),
 		}),
-		current: builder.mutation<ResponceUserData, userData>({
+		current: builder.query<ResponceUserData, void>({
 			query: () => ({
-				url: '/user/login',
+				url: '/user/current',
 				method: 'GET',
 			}),
 		}),
@@ -32,6 +32,6 @@ export const authApi = api.injectEndpoints({
 export const {
 	useLoginMutation,
 	useRegisterMutation,
-	useCurrentMutation,
+	useCurrentQuery,
 	endpoints: { login, register, current },
 } = authApi;
